@@ -141,4 +141,38 @@ Returns a boolean, ``true`` if the bot is looping the current music, ``false`` o
 ```js
 music.playlistInfo(guild);
 ```
-Returns an array containing information about every music in the playlist, ordered by queue order. Throws an error if the bot is not playing.
+Returns an array containing information about every song in the playlist, ordered by queue order. Throws an error if the bot is not playing.
+
+### What is the size of the playlist ?
+```js
+music.playlistSize(guild);
+```
+Returns the number of songs in the playlist. Throws an error if the bot is not playing.
+
+### Is the playlist empty ?
+```js
+music.isPlaylistEmpty(guild);
+```
+Whether or not the playlist is empty. Throws an error if the bot is not playing.
+
+### Information about a music in the playlist
+```js
+music.musicInfo(guild, index);
+```
+Returns information about a music in the playlist. eg.
+```js
+{
+  title: 'Me at the zoo', // the title of the video
+  description: 'The first video on YouTube. Maybe it\'s time to go back to the zoo? The name of the music playing in the background is Darude - Sandstorm.', // the description of the video
+  author: // the channel that uploaded the video
+   { name: 'jawed',
+     avatarURL: 'https://yt3.ggpht.com/-5rLAp8qGoEY/AAAAAAAAAAI/AAAAAAAAAAA/LtzVhVaf_do/s88-c-k-no-mo-rj-c0xffffff/photo.jpg',
+     channelURL: 'https://www.youtube.com/channel/UC4QobU6STFB0P71PMvOGN5A' },
+  thumbnailURL: 'https://i.ytimg.com/vi/jNQXAC9IVRw/default.jpg',
+  length: 19000, // the length of the video (in milliseconds)
+  link: 'https://www.youtube.com/watch?v=jNQXAC9IVRw', // the link of the video
+  member: SOMEONE // the guild member that requested the video
+  file: false, // whether or not this music is a local file
+  time: 2500 // the time since this video has been playing (in milliseconds)
+}
+```
