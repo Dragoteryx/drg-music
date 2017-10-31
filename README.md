@@ -18,6 +18,8 @@ Then, you'll need to interact with the MusicHandler you just created.
 With this module, you can ask the bot to join and leave a voice channel, to request and play a Youtube video, to pause/resume, to set the volume, etc.
 Most commands will require you to specify the guild where you want to execute the action.
 
+The music handler will emit an event whenever something happens (eg. when the current song is finished or when the playlist is empty), and throw errors when it's trying to do something impossible. (eg. joining someone who isn't in a voice channel)
+
 ### Join a voice channel
 ```js
 music.join(member);
@@ -64,7 +66,7 @@ music.nextMusic(guild);
 ```
 If the playlist is empty, the bot will stop playing music.
 
-Emits an event ``next``, with the guild where the current music was skipped along information about the next music.
+Emits an event ``skipped``, with the guild where the current music was skipped along information about the next music.
 
 ### Shuffle the playlist
 ```js
@@ -107,3 +109,36 @@ music.toggleLooping(guild);
 Whether or not the current music must repeat itself upon end.
 
 Emits an event ``looping``, along the guild where it was toggled, the current music and whether or not looping is toggled.
+
+## Useful commands
+Those commands are used to ask something to the handler.
+
+### Is the bot connected ?
+```js
+music.isConnected(guild);
+```
+Returns a boolean, ``true`` if the bot is connected to a voice channel, ``false`` otherwise.
+
+### Is the bot playing a music ?
+```js
+music.isPlaying(guild);
+```
+Returns a boolean, ``true`` if the bot is playing a music, ``false`` otherwise. Throws an error if the bot is not connected.
+
+### Is the bot paused ?
+```js
+music.isPaused(guild);
+```
+Returns a boolean, ``true`` if the bot is paused, ``false`` otherwise. Throws an error if the bot is not playing.
+
+### Is the bot looping the current music ?
+```js
+music.isLooping(guild);
+```
+Returns a boolean, ``true`` if the bot is looping the current music, ``false`` otherwise. Throws an error if the bot is not playing.
+
+### What is the playlist ?
+```js
+music.playlistInfo(guild);
+```
+Returns an array containing information about every music in the playlist, ordered by queue order. Throws an error if the bot is not playing.
