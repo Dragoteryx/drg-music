@@ -191,7 +191,7 @@ When playing the next music, an event ``next`` is emitted with the guild and the
 When the current music is finished and the playlist is empty, an event ``empty`` is emitted with the guild.
 
 ## Example
-Here is an example of a Discord bot using this module.
+Here is an example of a Discord bot using this module. You can also check my bot DraBOTeryx which is using this plugin here : https://github.com/Dragoteryx/draboteryx
 ```js
 const Discord = require("discord.js");
 const drgMusic = require("drg-music");
@@ -200,19 +200,11 @@ const client = new Discord.Client();
 const music = new drgMusic.MusicHandler(client);
 let musicChannels = new Map();
 
-music.on("joined", guild => {
-	console.log("[MUSICBOT] Joined guild " + guild.name + " (" + guild.id + ")");
-	musicChannels.get(guild.id).send("I'm here !");
-});
-music.on("leaved", guild => {
-	console.log("[MUSICBOT] Leaved guild " + guild.name + " (" + guild.id + ")");
-	musicChannels.get(guild.id).send("Goodbye o/")
-});
 music.on("next", (guild, music2) => {
 	musicChannels.get(guild.id).send("Now playing: ``" + music2.title + "`` by ``" + music2.author.name + "``. (requested by " + music2.member +")");
 });
 
-  // ETC
+// ETC (other event listeners)
 
 client.on("message", message => {
 
@@ -226,7 +218,11 @@ client.on("message", message => {
     musicChannels.delete(msg.guild.id);
   }
 
-  // ETC
+  if (message.startsWith("/request ")) {
+    music.addMusic(message.member, message.replace("/request ",""));
+  }
+
+  // ETC (other commands)
 
 });
 
