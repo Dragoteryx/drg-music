@@ -78,6 +78,9 @@ exports.MusicHandler = function(client) {
 		playlists.get(member.guild.id).on("finished", (guild, music) => {
 			this.emit("finished", guild, music);
 		});
+		playlists.get(member.guild.id).on("volumechange", (guild, newVolume, oldVolume) => {
+			this.emit("volumechange", guild, newVolume, oldVolume);
+		});
 		member.voiceChannel.join();
 	}
 	this.leave = guild => {
@@ -187,7 +190,6 @@ exports.MusicHandler = function(client) {
 		if (volume < 0)
 			throw new Error("invalidVolume");
 		playlists.get(guild.id).volume(volume);
-		this.emit("volumechange", guild, volume);
 	}
 	this.toggleLooping = guild => {
 		if (guild == undefined)
@@ -343,6 +345,7 @@ function Playlist(guild, client) {
 		this.emit("cleared", guild);
 	}
 	this.volume = set => {
+		this.emit("volumechange", guild, set, volume);
 		volume = set;
 		if (dispatcher != null)
 			dispatcher.setVolume(volume/100.0);

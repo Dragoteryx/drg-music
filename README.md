@@ -45,18 +45,58 @@ music.addFile(member, filePath);
 ```
 ``member`` represents the guild member that requested the file.
 ``filePath`` represents the path of the file to play.
-Emits an event ``added``, with the guild where the file was added along information about the file. (cf ``music.musicInfo(index)``)
+Emits an event ``added``, with the guild where the file was added along information about the file.
 
 ### Remove a Youtube video/file from the playlist
 ```js
 music.removeMusic(guild, index);
 ```
 ``index`` represents the index of the music in the playlist. (cf ``music.playlistInfo()``)
-Emits an event ``removed``, with the guild from where the music was removed along information about the music. (cf ``music.musicInfo(index)``)
+Emits an event ``removed``, with the guild from where the music was removed along information about the music.
 
 ### Skip the current music
 ```js
 music.nextMusic(guild);
 ```
 If the playlist is empty, the bot will stop playing music.
-Emits an event ``next``, with the guild where the music was added along basic information about the music. (cf ``music.musicInfo(index)``)
+Emits an event ``next``, with the guild where the current music was skipped along information about the next music.
+
+### Shuffle the playlist
+```js
+music.shufflePlaylist(guild);
+```
+Emits an event ``shuffled``, with the guild where the playlist was shuffled.
+
+### Clear the playlist
+```js
+music.clearPlaylist(guild);
+```
+Emits an event ``shuffled``, with the guild where the playlist was cleared.
+
+### Pause/resume the music
+```js
+music.pauseMusic(guild);
+```
+Emits an event ``paused``, with the guild where the music was paused.
+```js
+music.resumeMusic(guild);
+```
+Emits an event ``resumed``, with the guild where the music was resumed.
+```js
+music.toggleMusic(guild);
+```
+Alternates between resume and paused, either emits ``paused`` or ``resumed`` with the guild.
+
+### Set the volume
+```js
+music.setVolume(guild, volume);
+```
+``volume`` must be >= 0. By default, it's set to 100.
+Emits an event ``volumechange`` along the guild where the volume was changed, the new volume and the old one.
+
+### Set a music to loop
+```js
+music.toggleLooping(guild);
+```
+Whether or not the current music must repeat itself upon end.
+Emits an event ``looping``, along the guild where it was toggled, the current music and whether or not looping is toggled.
