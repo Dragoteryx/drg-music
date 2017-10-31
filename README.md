@@ -23,6 +23,7 @@ Most commands will require you to specify the guild where you want to execute th
 music.join(member);
 ```
 ``member`` is the guild member that the bot will join.
+
 Emits an event ``joined``, with the guild that the bot joined.
 
 ### Leave a voice channel
@@ -37,6 +38,7 @@ music.addVideo(member, youtubeLink);
 ```
 ``member`` represents the guild member that requested the music.
 ``youtubeLink`` must be a Youtube video link.
+
 Emits an event ``added``, with the guild where the music was added along information about the music. (cf ``music.musicInfo(index)``)
 
 ### Add a local file to the playlist
@@ -45,6 +47,7 @@ music.addFile(member, filePath);
 ```
 ``member`` represents the guild member that requested the file.
 ``filePath`` represents the path of the file to play.
+
 Emits an event ``added``, with the guild where the file was added along information about the file.
 
 ### Remove a Youtube video/file from the playlist
@@ -52,6 +55,7 @@ Emits an event ``added``, with the guild where the file was added along informat
 music.removeMusic(guild, index);
 ```
 ``index`` represents the index of the music in the playlist. (cf ``music.playlistInfo()``)
+
 Emits an event ``removed``, with the guild from where the music was removed along information about the music.
 
 ### Skip the current music
@@ -59,6 +63,7 @@ Emits an event ``removed``, with the guild from where the music was removed alon
 music.nextMusic(guild);
 ```
 If the playlist is empty, the bot will stop playing music.
+
 Emits an event ``next``, with the guild where the current music was skipped along information about the next music.
 
 ### Shuffle the playlist
@@ -85,13 +90,14 @@ Emits an event ``resumed``, with the guild where the music was resumed.
 ```js
 music.toggleMusic(guild);
 ```
-Alternates between resume and paused, either emits ``paused`` or ``resumed`` with the guild.
+Alternates between resume and pause, either emits ``paused`` or ``resumed`` with the guild.
 
 ### Set the volume
 ```js
 music.setVolume(guild, volume);
 ```
 ``volume`` must be >= 0. By default, it's set to 100.
+
 Emits an event ``volumechange`` along the guild where the volume was changed, the new volume and the old one.
 
 ### Set a music to loop
@@ -99,4 +105,5 @@ Emits an event ``volumechange`` along the guild where the volume was changed, th
 music.toggleLooping(guild);
 ```
 Whether or not the current music must repeat itself upon end.
+
 Emits an event ``looping``, along the guild where it was toggled, the current music and whether or not looping is toggled.
