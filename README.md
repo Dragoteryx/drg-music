@@ -14,13 +14,13 @@ const music = new drgMusic.MusicHandler(client);
 
 Then, you'll need to interact with the MusicHandler you just created.
 
-## What can it do ?
+#### What can it do ?
 With this module, you can ask the bot to join and leave a voice channel, to request and play a Youtube video, to pause/resume, to set the volume, etc.
 Most commands will require you to specify the guild where you want to execute the action.
 
 The music handler will emit an event whenever something happens (eg. when the current song is finished or when the playlist is empty), and throw errors when it's trying to do something impossible. (eg. joining someone who isn't in a voice channel)
 
-### Join a voice channel
+##### Join a voice channel
 ```js
 music.join(member);
 ```
@@ -28,13 +28,13 @@ music.join(member);
 
 Emits an event ``joined``, with the guild that the bot joined.
 
-### Leave a voice channel
+#### Leave a voice channel
 ```js
 music.leave(guild);
 ```
 Emits an event ``leaved``, with the guild that the bot leaved.
 
-### Add a Youtube video to the playlist
+#### Add a Youtube video to the playlist
 ```js
 music.addVideo(member, youtubeLink);
 ```
@@ -43,7 +43,7 @@ music.addVideo(member, youtubeLink);
 
 Emits an event ``added``, with the guild where the music was added along information about the music. (cf ``music.musicInfo(index)``)
 
-### Add a local file to the playlist
+#### Add a local file to the playlist
 ```js
 music.addFile(member, filePath);
 ```
@@ -52,7 +52,7 @@ music.addFile(member, filePath);
 
 Emits an event ``added``, with the guild where the file was added along information about the file.
 
-### Remove a Youtube video/file from the playlist
+#### Remove a Youtube video/file from the playlist
 ```js
 music.removeMusic(guild, index);
 ```
@@ -60,7 +60,7 @@ music.removeMusic(guild, index);
 
 Emits an event ``removed``, with the guild from where the music was removed along information about the music.
 
-### Skip the current music
+#### Skip the current music
 ```js
 music.nextMusic(guild);
 ```
@@ -68,19 +68,19 @@ If the playlist is empty, the bot will stop playing music.
 
 Emits an event ``skipped``, with the guild where the current music was skipped along information about the next music.
 
-### Shuffle the playlist
+#### Shuffle the playlist
 ```js
 music.shufflePlaylist(guild);
 ```
 Emits an event ``shuffled``, with the guild where the playlist was shuffled.
 
-### Clear the playlist
+#### Clear the playlist
 ```js
 music.clearPlaylist(guild);
 ```
 Emits an event ``shuffled``, with the guild where the playlist was cleared.
 
-### Pause/resume the music
+#### Pause/resume the music
 ```js
 music.pauseMusic(guild);
 ```
@@ -94,7 +94,7 @@ music.toggleMusic(guild);
 ```
 Alternates between resume and pause, either emits ``paused`` or ``resumed`` with the guild.
 
-### Set the volume
+#### Set the volume
 ```js
 music.setVolume(guild, volume);
 ```
@@ -102,7 +102,7 @@ music.setVolume(guild, volume);
 
 Emits an event ``volumechange`` along the guild where the volume was changed, the new volume and the old one.
 
-### Set a music to loop
+#### Set a music to loop
 ```js
 music.toggleLooping(guild);
 ```
@@ -110,52 +110,52 @@ Whether or not the current music must repeat itself upon end.
 
 Emits an event ``looping``, along the guild where it was toggled, the current music and whether or not looping is toggled.
 
-## Useful commands
+### Useful commands
 Those commands are used to ask something to the handler.
 
-### Is the bot connected ?
+#### Is the bot connected ?
 ```js
 music.isConnected(guild);
 ```
 Returns a boolean, ``true`` if the bot is connected to a voice channel, ``false`` otherwise.
 
-### Is the bot playing a music ?
+#### Is the bot playing a music ?
 ```js
 music.isPlaying(guild);
 ```
 Returns a boolean, ``true`` if the bot is playing a music, ``false`` otherwise. Throws an error if the bot is not connected.
 
-### Is the bot paused ?
+#### Is the bot paused ?
 ```js
 music.isPaused(guild);
 ```
 Returns a boolean, ``true`` if the bot is paused, ``false`` otherwise. Throws an error if the bot is not playing.
 
-### Is the bot looping the current music ?
+#### Is the bot looping the current music ?
 ```js
 music.isLooping(guild);
 ```
 Returns a boolean, ``true`` if the bot is looping the current music, ``false`` otherwise. Throws an error if the bot is not playing.
 
-### What is the playlist ?
+#### What is the playlist ?
 ```js
 music.playlistInfo(guild);
 ```
 Returns an array containing information about every song in the playlist, ordered by queue order. Throws an error if the bot is not playing.
 
-### What is the size of the playlist ?
+#### What is the size of the playlist ?
 ```js
 music.playlistSize(guild);
 ```
 Returns the number of songs in the playlist. Throws an error if the bot is not playing.
 
-### Is the playlist empty ?
+#### Is the playlist empty ?
 ```js
 music.isPlaylistEmpty(guild);
 ```
 Whether or not the playlist is empty. Throws an error if the bot is not playing.
 
-### Information about a music in the playlist
+#### Information about a music in the playlist
 ```js
 music.musicInfo(guild, index);
 ```
@@ -179,8 +179,56 @@ Returns information about a music in the playlist. eg.
 ``index`` is the index of the music in the playlist. (cf ``music.playlistInfo(guild)``)
 Local file will have most of those properties ``undefined``. (only ``title``, ``link`` and ``member`` are available on a local file)
 
-### Information about the current music
+#### Information about the current music
 ```js
 music.playingInfo(guild);
 ```
 Returns information about the current music.
+
+### Events
+When the current music is finished, an event ``finished`` is emitted with the guild and the music.
+When playing the next music, an event ``next`` is emitted with the guild and the next music.
+When the current music is finished and the playlist is empty, an event ``empty`` is emitted with the guild.
+
+## Example
+Here is an example of a Discord bot using this module.
+```js
+const Discord = require("discord.js");
+const drgMusic = require("drg-music");
+
+const client = new Discord.Client();
+const music = new drgMusic.MusicHandler(client);
+let musicChannels = new Map();
+
+music.on("joined", guild => {
+	console.log("[MUSICBOT] Joined guild " + guild.name + " (" + guild.id + ")");
+	musicChannels.get(guild.id).send("I'm here !");
+});
+music.on("leaved", guild => {
+	console.log("[MUSICBOT] Leaved guild " + guild.name + " (" + guild.id + ")");
+	musicChannels.get(guild.id).send("Goodbye o/")
+});
+music.on("next", (guild, music2) => {
+	musicChannels.get(guild.id).send("Now playing: ``" + music2.title + "`` by ``" + music2.author.name + "``. (requested by " + music2.member +")");
+});
+
+  // ETC
+
+client.on("message", message => {
+
+  if (message == "/join") {
+    musicChannels.set(msg.guild.id, msg.channel);
+    music.join(msg.member);
+  }
+
+  if (message == "/leave") {
+    music.leave(msg.guild);
+    musicChannels.delete(msg.guild.id);
+  }
+
+  // ETC
+
+});
+
+client.login(MYBOTTOKEN);
+```
