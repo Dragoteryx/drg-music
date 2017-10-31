@@ -153,7 +153,7 @@ Returns the number of songs in the playlist. Throws an error if the bot is not p
 ```js
 music.isPlaylistEmpty(guild);
 ```
-Whether or not the playlist is empty. Throws an error if the bot is not playing.
+Whether or not the playlist is empty. Throws an er\nror if the bot is not playing.
 
 ### Information about a music in the playlist
 ```js
@@ -168,7 +168,7 @@ Returns information about a music in the playlist. eg.
    { name: 'jawed',
      avatarURL: 'https://yt3.ggpht.com/-5rLAp8qGoEY/AAAAAAAAAAI/AAAAAAAAAAA/LtzVhVaf_do/s88-c-k-no-mo-rj-c0xffffff/photo.jpg',
      channelURL: 'https://www.youtube.com/channel/UC4QobU6STFB0P71PMvOGN5A' },
-  thumbnailURL: 'https://i.ytimg.com/vi/jNQXAC9IVRw/default.jpg',
+  thumbnailURL: 'https://i.ytimg.com/vi/jNQXAC9IVRw/default.jpg', // the thumbnail of the video
   length: 19000, // the length of the video (in milliseconds)
   link: 'https://www.youtube.com/watch?v=jNQXAC9IVRw', // the link of the video
   member: SOMEONE // the guild member that requested the video
