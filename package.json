@@ -1,0 +1,19 @@
+{
+  "name": "drg-music",
+  "version": "1.2.0",
+  "description": "A single file module to easily manage Discord music bots using Discord.js",
+  "main": "music.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Dragoteryx/drg-music.git"
+  },
+  "author": "Dragoteryx",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Dragoteryx/drg-music/issues"
+  },
+  "homepage": "https://github.com/Dragoteryx/drg-music#readme"
+}
