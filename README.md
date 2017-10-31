@@ -153,7 +153,7 @@ Returns the number of songs in the playlist. Throws an error if the bot is not p
 ```js
 music.isPlaylistEmpty(guild);
 ```
-Whether or not the playlist is empty. Throws an er\nror if the bot is not playing.
+Whether or not the playlist is empty. Throws an error if the bot is not playing.
 
 ### Information about a music in the playlist
 ```js
@@ -176,3 +176,11 @@ Returns information about a music in the playlist. eg.
   time: 2500 // the time since this video has been playing (in milliseconds)
 }
 ```
+``index`` is the index of the music in the playlist. (cf ``music.playlistInfo(guild)``)
+Local file will have most of those properties ``undefined``. (only ``title``, ``link`` and ``member`` are available on a local file)
+
+### Information about the current music
+```js
+music.playingInfo(guild);
+```
+Returns information about the current music.
