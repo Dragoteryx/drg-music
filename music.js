@@ -78,7 +78,6 @@ exports.MusicHandler = function(client) {
 		playlists.get(member.guild.id).on("finished", (guild, music) => {
 			this.emit("finished", guild, music);
 		});
-
 		member.voiceChannel.join();
 	}
 	this.leave = guild => {
@@ -429,7 +428,7 @@ function Music(link, member, file) {
 		else
 			return {
 				title : this.title,
-				path : this.link,
+				link : this.link,
 				member : this.member,
 				file : true
 			}
