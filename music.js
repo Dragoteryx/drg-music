@@ -31,8 +31,8 @@ exports.intToTime = int => {
 }
 
 //CLASSES
-exports.MusicHandler = function (cl) {
-	if (client == undefined)
+exports.MusicHandler = function(cl) {
+	if (cl == undefined)
 		throw new Error("missingParameter: client");
 	EventEmitter.call(this);
 	var playlists = new Map();
