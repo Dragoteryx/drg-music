@@ -1,10 +1,10 @@
 {
   "name": "drg-music",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "A single file module to easily manage Discord music bots using Discord.js",
   "main": "music.js",
   "dependencies": {
-	"ytdl-core": "^0.18.1",
+	   "ytdl-core": "^0.18.1",
     "youtube-search": "^1.0.10"
   },
   "scripts": {
