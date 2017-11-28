@@ -1,4 +1,5 @@
 # drg-music
+![Drg Music](https://nodei.co/npm/drg-music.png?downloads=true&stars=true)
 A single file module to easily manage Discord music bots using Discord.js
 
 ## How to use ?
