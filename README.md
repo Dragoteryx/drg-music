@@ -52,7 +52,7 @@ The callback lets you interact with the music that was added. (cf ``music.musicI
 
 #### Add a local file to the playlist
 ```js
-music.addFile(member, filePath);
+music.addFile(member, filePath, callback);
 ```
 ``member`` represents the guild member that requested the file.
 ``filePath`` represents the path of the file to play.
@@ -61,7 +61,7 @@ The callback lets you interact with the file that was added.
 
 #### Remove a Youtube video/file from the playlist
 ```js
-music.removeMusic(guild, index);
+music.removeMusic(guild, index, callback);
 ```
 ``index`` represents the index of the music in the playlist.
 
@@ -101,7 +101,7 @@ The callback lets you know whether or not the playlist got paused, as well as in
 
 #### Set the volume
 ```js
-music.setVolume(guild, volume);
+music.setVolume(guild, volume, callback);
 ```
 ``volume`` must be >= 0. By default, it's set to 100.
 
@@ -109,7 +109,7 @@ The callback lets interact with the old volume.
 
 #### Set a music to loop
 ```js
-music.toggleLooping(guild);
+music.toggleLooping(guild, callback);
 ```
 Whether or not the current music must repeat itself upon end.
 
