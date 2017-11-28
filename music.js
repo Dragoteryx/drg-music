@@ -308,7 +308,7 @@ function Playlist(gld, cl) {
 	}
 	this.add = music => {
 		list.push(music);
-		if (!this.playing())
+		if (!this.isPlaying())
 			toNext = true;
 	}
 	this.remove = index => {
@@ -337,19 +337,19 @@ function Playlist(gld, cl) {
 		}
 	}
 	this.toggle = () => {
-		if (this.paused())
+		if (this.isPaused())
 			return this.resume();
 		else
 			return this.pause();
 	}
 	this.pause = () => {
-		if (this.paused())
+		if (this.isPaused())
 			throw new Error("musicNotPaused");
 		dispatcher.pause();
 		return true;
 	}
 	this.resume = () => {
-		if (!this.paused())
+		if (!this.isPaused())
 			throw new Error("musicAlreadyPaused");
 		dispatcher.resume();
 		return false;
