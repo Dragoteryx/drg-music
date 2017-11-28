@@ -3,6 +3,7 @@
 
 // IMPORTS
 const ytdl = require("ytdl-core");
+const youtubeSearch = require("youtube-search");
 const EventEmitter = require("events");
 
 // VARIABLES
@@ -120,6 +121,27 @@ exports.MusicHandler = function(cl) {
 		playlists.get(member.guild.id).add(music);
 		callback(music.info());
 		return this;
+	}
+	this.addYoutubeQuery = (member, query, ytbApiKey, callback) => {
+		if (member === undefined)
+			throw new Error("missingParameter: member");
+		if (query === undefined)
+			throw new Error("missingParameter: query");
+		if (ytbApiKey === undefined)
+			throw new Error("missingParameter: youtube API key");
+		while (query.includes(" "))
+			query = query.replace(" ", "+");
+			youtubeSearch(query, {maxResults : 10, key : ytbApiKey}, (err, rep) => {
+				if (err) throw err;
+					let link = "";
+					for (let i = 0; i < 10; i++)
+						if (rep[i].kind == "youtube#video" && link == "")
+							link += rep[i].link;
+					if (link != "")
+						this.addMusic(member, link, callback);
+					else
+						throw new Error("youtubeQueryNoResults");
+			});
 	}
 	this.removeMusic = (guild, index, callback) => {
 		if (guild === undefined)
