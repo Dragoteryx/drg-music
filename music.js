@@ -361,9 +361,11 @@ function Playlist(gld, cl) {
 		list = [];
 	}
 	this.setVolume = set => {
+		let oldVolume = volume;
 		volume = set;
 		if (dispatcher != null)
 			dispatcher.setVolume(volume/100.0);
+		return oldVolume;
 	}
 	this.reset = () => {
 		list = [];
