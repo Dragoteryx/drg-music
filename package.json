@@ -1,11 +1,12 @@
 {
   "name": "drg-music",
-  "version": "3.0.0",
+  "version": "3.2.0",
   "description": "A single file module to easily manage Discord music bots using Discord.js",
   "main": "music.js",
   "dependencies": {
     "discord.js": "^11.2.1",
-	  "ytdl-core": "^0.18.1"
+	"ytdl-core": "^0.18.1",
+	"youtube-search": "^1.0.10"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
