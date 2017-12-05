@@ -1,6 +1,6 @@
 {
   "name": "drg-music",
-  "version": "3.2.1",
+  "version": "3.2.2",
   "description": "A single file module to easily manage Discord music bots using Discord.js",
   "main": "music.js",
   "dependencies": {

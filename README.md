@@ -24,7 +24,7 @@ The music handler will emit an event whenever something happens. (eg. when the c
 
 ##### Join a voice channel
 ```js
-handler.join(member, callback);
+handler.join(member);
 ```
 ``member`` is the guild member that the bot will join.
 
@@ -32,14 +32,14 @@ Returns a resolved Promise, or a rejected Promise with an error if something goe
 
 #### Leave a voice channel
 ```js
-handler.leave(guild, callback);
+handler.leave(guild);
 ```
 
 Returns a resolved Promise, or a rejected Promise with an error if something goes wrong.
 
 #### Add a Youtube video or a local file to the playlist
 ```js
-handler.pushMusic(options, callback);
+handler.pushMusic(options);
 ```
 ``options`` is an object containing the following information:
 ``options.link`` is a Youtube link.
@@ -53,7 +53,7 @@ Returns a Promise resolved with the music that was added.
 
 #### Remove a Youtube video/file from the playlist
 ```js
-handler.removeMusic(guild, index, callback);
+handler.removeMusic(guild, index);
 ```
 ``index`` represents the index of the music in the playlist.
 
@@ -61,7 +61,7 @@ Returns a Promise resolved with the music that was removed.
 
 #### Skip the current music
 ```js
-handler.nextMusic(guild, callback);
+handler.nextMusic(guild);
 ```
 If the playlist is empty, the bot will stop playing music.
 
@@ -69,35 +69,35 @@ Returns a Promise resolved with the music that was skipped.
 
 #### Shuffle the playlist
 ```js
-handler.shufflePlaylist(guild, callback);
+handler.shufflePlaylist(guild);
 ```
 
 Returns a resolved Promise.
 
 #### Clear the playlist
 ```js
-handler.clearPlaylist(guild, callback);
+handler.clearPlaylist(guild);
 ```
 
 Returns a resolved Promise.
 
 #### Pause/resume the music
 ```js
-handler.pauseMusic(guild, callback);
+handler.pauseMusic(guild);
 ```
 Returns a resolved Promise.
 ```js
-handler.resumeMusic(guild, callback);
+handler.resumeMusic(guild);
 ```
 Returns a resolved Promise.
 ```js
-handler.toggleMusic(guild, callback);
+handler.toggleMusic(guild);
 ```
 Returns a Promise resolved with a boolean set to ``true`` if the music is paused, ``false`` otherwise.
 
 #### Set the volume
 ```js
-handler.setVolume(guild, volume, callback);
+handler.setVolume(guild, volume);
 ```
 ``volume`` must be >= 0. By default, it's set to 100.
 
@@ -105,7 +105,7 @@ Return a Promise resolved with the old volume.
 
 #### Set a music to loop
 ```js
-handler.toggleLooping(guild, callback);
+handler.toggleLooping(guild);
 ```
 Whether or not the current music must repeat itself upon end.
 
